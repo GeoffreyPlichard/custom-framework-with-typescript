@@ -3,7 +3,7 @@ type Callback = () => void;
 export class Eventing {
   events: { [key: string]: Callback[] } = {};
 
-  on(eventName: string, callback: Callback): void {
+  on = (eventName: string, callback: Callback): void => {
     // Get the corresponding event callback array
     const handlers = this.events[eventName] || [];
 
@@ -14,7 +14,7 @@ export class Eventing {
     this.events[eventName] = handlers;
   }
 
-  trigger(eventName: string): void {
+  trigger = (eventName: string): void => {
     const handlers = this.events[eventName];
 
     if (!handlers || handlers.length === 0) {
