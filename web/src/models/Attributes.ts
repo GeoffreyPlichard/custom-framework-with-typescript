@@ -19,4 +19,8 @@ export class Attributes<T extends object> {
     // Override this.data with new data
     Object.assign(this.data, update);
   }
+
+  getAll(): T {
+    return this.data;
+  }
 }
