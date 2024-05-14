@@ -22,3 +22,6 @@ user.on('save', () => {
 });
 
 user.trigger('fessave');
+
+// npm install json-server@0
+// "start:parcel": "npx parcel index.html"
