@@ -1,3 +1,4 @@
+import { NotFoundComponent } from "../components/errors/NotFoundComponent";
 import { HomeComponent } from "../components/home/HomeComponent";
 import { UsersComponent } from "../components/users/UsersComponent";
 
@@ -20,8 +21,6 @@ export class Routing {
     }
   ];
 
-  constructor() {}
-
   getComponent() {
     const pathName = window.location.pathname;
 
@@ -30,12 +29,7 @@ export class Routing {
         return new route.component();
       }
     }
-
-    const route = this.routes.find(route => route.path === '/');
-    if (route) {
-      return new route.component();
-    } else {
-      throw new Error('No route found');
-    }
+    
+    return new NotFoundComponent();
   }
 }
