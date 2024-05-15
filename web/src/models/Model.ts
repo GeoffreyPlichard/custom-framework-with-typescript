@@ -27,17 +27,12 @@ export class Model<T extends HasId> {
     private sync: Sync<T>
   ){}
 
-  get on() {
-    return this.events.on;
-  }
-
-  get trigger() {
-    return this.events.trigger;
-  }
-
-  get get() {
-    return this.attributes.get;
-  }
+  // We don't need to use the getter in this situation
+  // because this.events.on will be called after events is instanciated
+  // thx to the constructor 
+  on = this.events.on;
+  trigger = this.events.trigger;
+  get = this.attributes.get;
 
   set(update: T): void {
     this.attributes.set(update);
