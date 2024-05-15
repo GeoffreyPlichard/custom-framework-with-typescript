@@ -1,15 +1,28 @@
-import { User } from "../models/User";
+import { Model, HasId } from "../models/Model";
 
-export abstract class View {
+export abstract class View<T extends Model<P>, P extends HasId> {
+  regions: { [key: string]: HTMLElement } = {};
+
   constructor(
-    public parent: HTMLElement,
-    public model: User
+    public parent: Element,
+    public model: T
   ) {
     this.bindModel();
   }
 
-  abstract eventsMap(): { [key: string]: () => void};
   abstract template(): string;
+
+  // remove abstract and return an empty object so it doesn't 
+  // need to be implemented anymore
+  regionsMap(): { [key: string]: string} {
+    return {};
+  }
+
+  // remove abstract and return an empty object so it doesn't 
+  // need to be implemented anymore
+  eventsMap(): { [key: string]: () => void} {
+    return {};
+  }
 
   bindModel(): void {
     this.model.on('change', () => {
@@ -31,6 +44,23 @@ export abstract class View {
     }
   }
 
+  mapRegions(fragment: DocumentFragment): void {
+    const regionsMap = this.regionsMap();
+
+    for (let key in regionsMap) {
+      const selector = regionsMap[key];
+      const element = fragment.querySelector(selector) as HTMLElement;
+
+      if (element) {
+        this.regions[key] = element;
+      }
+    }
+  }
+
+  onRender(): void {
+
+  }
+
   render(): void {
     // Avoid duplicating the element each time we render
     this.parent.innerHTML = '';
@@ -41,6 +71,10 @@ export abstract class View {
     const fragment: DocumentFragment = templateElement.content;
 
     this.bindEvents(fragment);
+    this.mapRegions(fragment);
+
+    this.onRender();
+
     this.parent.append(fragment);
   }
 }
