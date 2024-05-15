@@ -57,10 +57,6 @@ export abstract class View<T extends Model<P>, P extends HasId> {
     }
   }
 
-  onRender(): void {
-
-  }
-
   render(): void {
     // Avoid duplicating the element each time we render
     this.parent.innerHTML = '';
@@ -73,7 +69,6 @@ export abstract class View<T extends Model<P>, P extends HasId> {
     this.bindEvents(fragment);
     this.mapRegions(fragment);
 
-    this.onRender();
 
     this.parent.append(fragment);
   }
