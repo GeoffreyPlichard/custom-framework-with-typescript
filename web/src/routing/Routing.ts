@@ -1,6 +1,6 @@
-import { NotFoundComponent } from "../components/errors/NotFoundComponent";
-import { HomeComponent } from "../components/home/HomeComponent";
-import { UsersComponent } from "../components/users/UsersComponent";
+import { NotFoundComponent } from "../components/errors/not-found.component";
+import { HomeComponent } from "../components/home/home.component";
+import { UsersComponent } from "../components/users/users.component";
 
 interface Route {
   path: string;

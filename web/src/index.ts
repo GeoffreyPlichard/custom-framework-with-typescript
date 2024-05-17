@@ -1,7 +1,7 @@
 // import { UserEdit } from "./views/UserEdit";
 // import { User } from "./models/User";
 
-import { HomeComponent } from "./components/home/HomeComponent";
+import { HomeComponent } from "./components/home/home.component";
 import { Routing } from "./routing/Routing";
 
 // const user = User.buildUser({
